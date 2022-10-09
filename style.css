@@ -8,10 +8,11 @@
 }
 
 .row .card{
+    width:25%;
     background:linear-gradient(to right, #DDCAA3,#3F5251);
-    
 }
-.card .card-header{
+
+.row .card .card-header{
     color: white;
     background-color: black;
 }
@@ -19,7 +20,8 @@
 .img-wrapper{
     margin-top: 2rem;
     margin-bottom: 2rem;
-    width:80%;
+    width:50%;
+    aspect-ratio: 1;
     margin-left:auto;
     margin-right: auto;
 }
