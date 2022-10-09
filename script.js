@@ -10,7 +10,7 @@ fetch(restCountUrl)
     for (let i = 0; i < 15; i++) {
       //National Data Card
       var natData = document.createElement("div");
-      natData.className = "col card mx-3";
+      natData.className = "col col-sm-12 col-lg-4  card mx-2 my-2";
       natData.innerHTML = `
           <div class="card-body" id="${data[i].name.common}-body">
             <h5 class="card-header">${data[i].name.common}</h5>
@@ -80,7 +80,7 @@ function weatherButton(countName) {
     var getWeathDiv = document.getElementById(`${countName}-weather`);
     getWeathDiv.innerHTML = "";
     var cardButton = document.getElementById(`${countName}-weathButton`);
-    cardButton.textContent = "Reset Weather";
+    cardButton.textContent = "Click for Weather";
     weatherFetched = false;
     console.log(`weather fetched = ${weatherFetched}`);
   }
