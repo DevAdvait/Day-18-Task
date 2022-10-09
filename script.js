@@ -1,12 +1,12 @@
+//restcountries api url for fetch
 let restCountUrl = "https://restcountries.com/v3.1/all";
-
-// let openWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${openWeathApiKey}`;
+//openweather api key
 let openWeathApiKey = "0f05632401cf9e9fc68ffff7ccee9e43";
 
+//fetch countries data.
 fetch(restCountUrl)
   .then((res) => res.json())
   .then((data) => {
-    
     for (let i = 0; i < 15; i++) {
       //National Data Card
       var natData = document.createElement("div");
@@ -32,9 +32,11 @@ fetch(restCountUrl)
               data[i].cca3
             }</h6>
             <div class="button-div" id="${data[i].name.common}-button-div">
-              <button type="button" class="btn btn-primary" onclick="weatherButton(this.value)" id ="${data[i].name.common}-weathButton" value="${
+              <button type="button" class="btn btn-primary" onclick="weatherButton(this.value)" id ="${
                 data[i].name.common
-              }">Click for weather</button>
+              }-weathButton" value="${
+        data[i].name.common
+      }">Click for weather</button>
             </div>
           </div>`;
 
@@ -42,22 +44,25 @@ fetch(restCountUrl)
       cardCont.appendChild(natData);
     }
   })
-
   .catch((error) => console.log(error));
 
-  var weatherFetched = false;
-  console.log(`weather fetched = ${weatherFetched}`)
-//get Weather Data.
-function weatherButton(countName) {
 
+
+
+var weatherFetched = false;
+
+
+//get Weather Data on button click.
+function weatherButton(countName) {
   let openWeathCountName = `https://api.openweathermap.org/data/2.5/weather?q=${countName}&appid=${openWeathApiKey}`;
-  if(weatherFetched === false){
+  // condition to check if weather data if displayed
+  if (weatherFetched === false) {
     fetch(openWeathCountName)
       .then((res) => res.json())
       .then((data) => {
         var weatherData = document.createElement("div");
-        weatherData.className = `${countName}-weather`; 
-        weatherData.setAttribute("id",`${countName}-weather`)
+        weatherData.className = `${countName}-weather`;
+        weatherData.setAttribute("id", `${countName}-weather`);
         weatherData.innerHTML = `
         <h6 class="country-weather-description region">Description : ${data.weather[0].description}</h6>
         <h6 class="country-current-temp region">Current Temperature : ${data.main.temp}</h6>`;
@@ -67,19 +72,16 @@ function weatherButton(countName) {
         var cardButton = document.getElementById(`${countName}-weathButton`);
         cardButton.textContent = "Reset Weather";
         weatherFetched = true;
-        console.log(`weather fetched = ${weatherFetched}`)
+        console.log(`weather fetched = ${weatherFetched}`);
       });
-      
   }
-  if(weatherFetched === true){
+  // condition to hide weather data 
+  if (weatherFetched === true) {
     var getWeathDiv = document.getElementById(`${countName}-weather`);
     getWeathDiv.innerHTML = "";
     var cardButton = document.getElementById(`${countName}-weathButton`);
     cardButton.textContent = "Reset Weather";
     weatherFetched = false;
-    console.log(`weather fetched = ${weatherFetched}`)
+    console.log(`weather fetched = ${weatherFetched}`);
   }
-  
-
-    
 }
